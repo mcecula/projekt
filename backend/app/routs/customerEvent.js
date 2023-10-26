@@ -8,6 +8,6 @@ module.exports = () => {
 
     router.post('/add', customerController.create)
 
-     /*  router.delete('/delete/:id', customerController.delete)*/
-    return router   
+    router.delete('/delete/:id', customerController.delete)
+    return router
 }
