@@ -1,0 +1,26 @@
+form {
+    text-align: left;
+    background-color: rgb(46, 171, 209);
+    border: 1px solid black;
+    max-width: 600px;
+    margin: auto;
+    padding: 15px;
+}
+
+ form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.btn {
+    font-size: 13px;
+    border-radius: 6px ;
+    display: inline-block;
+    margin: 15px 0;
+}
+.btn:hover {
+    background-color: rgb(26, 151, 58);
+    cursor: pointer;
+}
