@@ -21,6 +21,10 @@ app.use(cors())
 const eventsRouts = require('./app/routs/customerEvent')()
 app.use('/customers', eventsRouts)
 
+app.get('/customers/:id/', (req, res) => {
+    res.send(req.params)
+})
+
 app.listen(config.app.port, () => {
     console.log('Serwer Node.js działa');
 });

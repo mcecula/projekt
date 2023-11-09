@@ -9,5 +9,8 @@ module.exports = () => {
     router.post('/add', customerController.create)
 
     router.delete('/delete/:id', customerController.delete)
+
+    router.get('/customers/:id', customerController.oneCustomer)
+
     return router
 }

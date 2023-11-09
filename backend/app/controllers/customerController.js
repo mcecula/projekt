@@ -26,27 +26,42 @@ module.exports = {
             .catch(err => {
                 res.status(500).json({ error: err })
             })
-        },
-    
-        delete: (req, res,) => {
-            const id = req.params.id
-    
-    
-            CustomerModel.findByIdAndDelete(id)
-                .then(() => {
-                    res.status(200).json({
-                        id: id,
-                        deleted: true
-                    })
+    },
+
+    delete: (req, res) => {
+        const id = req.params.id
+
+        CustomerModel.findByIdAndDelete(id)
+            .then(() => {
+                res.status(200).json({
+                    id: id,
+                    deleted: true
                 })
-                .catch(err => {
-                    res.status(500).json({
-                        message: 'Error while deleting ',
-                        error: err
-                    })
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message: 'Error while deleting ',
+                    error: err
                 })
-    
-        },
+            })
+
+    },
+
+    oneCustomer: (req, res) => {
+        CustomerModel.findById(req.params.id)
+            .then(() => {
+                res.json(req.params.id)
+            })
+            .catch(err => {
+                res.status(500).json({
+                    error: err
+                })
+            })
+
+
     }
+}
+
+
 
 

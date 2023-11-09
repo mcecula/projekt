@@ -8,7 +8,7 @@ import config from '../config';
 import CustomerData from '../views/CustomerData';
 
 /* all customers */
-const AppRoutes = () => {
+const AppRoutes = (props) => {
   const [customers, setCustomers] = useState([])
 
   useEffect(() => {
@@ -39,7 +39,6 @@ const AppRoutes = () => {
     
   });
 
-
   const getCustomer = () => {
     axios
       .get(config.api.url + `/customers`)
@@ -64,7 +63,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path='/' element={<Home customers={customers} />} />
       <Route path='/customer' element={<AddCustomer getCustomers={getCustomers} />} />
-      <Route path='/login' element={<Login />} />
+      <Route path='/login' element={<Login setCustomer={props.setCustomer}/>} />
       <Route path='/customerData' element={<CustomerData customer={customer} />} />
     </Routes>
 
