@@ -7,13 +7,32 @@ import { useEffect, useState } from 'react';
 import config from '../config';
 import CustomerData from '../views/CustomerData';
 
+
+
+
+
+
+
+
+
+
+
+
 /* all customers */
 const AppRoutes = (props) => {
   const [customers, setCustomers] = useState([])
 
-  useEffect(() => {
-    getCustomers()
-  }, [])
+  /* one customer */
+  const [customer, setCustomer] = useState({
+    name: "",
+    address: {
+      street: "",
+      postCode: "",
+      city: "",
+    },
+    nip: "",
+
+  });
 
   const getCustomers = () => {
     axios
@@ -26,23 +45,11 @@ const AppRoutes = (props) => {
       })
   }
 
-
-/* one customer */
-  const [customer, setCustomer] = useState({
-    name: "",
-    address: {
-      street: "",
-      postCode: "",
-      city: "",
-    },
-    nip: "",
-    
-  });
-
-  const getCustomer = () => {
+  const getCustomer = (id) => {
     axios
-      .get(config.api.url + `/customers`)
+      .get(config.api.url + `/customers/${id}`)
       .then((res) => {
+        console.log(res.data);
         setCustomer(res.data)
       })
       .catch((err) => {
@@ -50,20 +57,24 @@ const AppRoutes = (props) => {
       })
   }
 
-  useEffect(() => {
+ /*  useEffect(() => {
     getCustomer()
+  }, []) */
+
+
+  useEffect(() => {
+    getCustomers()
   }, [])
 
-
-
+  
 
 
   return (
 
     <Routes>
-      <Route path='/' element={<Home customers={customers} />} />
+      <Route path='/' element={<Home customers={customers} getCustomer={getCustomer} />} />
       <Route path='/customer' element={<AddCustomer getCustomers={getCustomers} />} />
-      <Route path='/login' element={<Login setCustomer={props.setCustomer}/>} />
+      <Route path='/login' element={<Login setUser={props.setUser} />} />
       <Route path='/customerData' element={<CustomerData customer={customer} />} />
     </Routes>
 

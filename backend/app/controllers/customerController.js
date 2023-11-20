@@ -1,5 +1,6 @@
 const CustomerModel = require('../models/CustomerModel');
 const customerEvent = require('../routs/customerEvent');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     index: (req, res) => {
@@ -49,17 +50,16 @@ module.exports = {
 
     oneCustomer: (req, res) => {
         CustomerModel.findById(req.params.id)
-            .then(() => {
-                res.json(req.params.id)
+            .then((respApi) => {
+                res.json(respApi)
             })
             .catch(err => {
                 res.status(500).json({
                     error: err
                 })
             })
-
-
     }
+
 }
 
 

@@ -10,7 +10,8 @@ module.exports = () => {
 
     router.delete('/delete/:id', customerController.delete)
 
-    router.get('/customers/:id', customerController.oneCustomer)
+    router.get('/:id', customerController.oneCustomer)
 
+    
     return router
 }
