@@ -1,14 +1,14 @@
-*{
+* {
     box-sizing: border-box;
-    position: relative;
+    position: relative; 
     text-align: left;
-    
 }
 
-.customer{
+.customer {
     border: 1px solid black;
-    width: 100%;
-   margin-bottom: 10px;
+    border-radius: 10px;
+   
+    
 }
 
 .data {

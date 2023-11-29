@@ -1,16 +1,17 @@
 import './Login.css'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useState } from 'react'
 import axios from 'axios'
 import config from '../config';
 
 const Login = (props) => {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         username: '',
         password: '',
     })
 
-    const [loginMessage, setLoginMessage] = useState('');
+    /* const [loginMessage, setLoginMessage] = useState(''); */
 
     const handleInputChange = (e) => {
         const target = e.target;
@@ -22,7 +23,7 @@ const Login = (props) => {
         });
     };
 
-   /*  console.log(formData) */
+    console.log(formData)
 
 
 
@@ -36,7 +37,8 @@ const Login = (props) => {
             .then((res) => {
                 console.log(res.data)
                 props.setUser(res.data)
-                localStorage.setItem('user', JSON.stringify(res.data))   
+                localStorage.setItem('user', JSON.stringify(res.data)) 
+                navigate('/')  
             })
             .catch((error) => {
                 console.error(error);
@@ -47,7 +49,7 @@ const Login = (props) => {
         <div className="login">
             {props.customer && <Navigate to='/' />}
             <form action='/login' method='POST' onSubmit={handleSubmit}>
-                {loginMessage && <h2>{loginMessage}</h2>}
+               {/*  {loginMessage && <h2>{loginMessage}</h2>} */}
                 <label className="login">Login</label>
                 <input type="text" name="username" placeholder="Login" value={formData.username} onChange={handleInputChange} />
                 <label className="password">Hasło</label>

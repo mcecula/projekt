@@ -16,23 +16,23 @@ const User = mongoose.Schema({
     timestamps: true
 });
 
-User.pre('save', function(next) {
+User.pre('save', function (next) {
     const user = this;
- 
-    if(!user.isModified('password')) {
+
+    if (!user.isModified('password')) {
         return next();
     }
- 
-    bcrypt.genSalt(10, function(err, salt) {
+
+    bcrypt.genSalt(10, function (err, salt) {
         if (err) {
             res.send(err);
         }
- 
-        bcrypt.hash(user.password, salt, function(err, hash) {
+
+        bcrypt.hash(user.password, salt, function (err, hash) {
             if (err) {
                 res.send(err);
             }
- 
+
             user.password = hash;
             next();
         })
@@ -40,7 +40,7 @@ User.pre('save', function(next) {
 })
 
 User.methods.generateAuthToken = (user) => {
-    const token = jwt.sign({id: user.id}, "secretKey", { expiresIn: "1h" });
+    const token = jwt.sign({ id: user.id }, "secretKey", { expiresIn: "1h" });
     return token;
 }
 

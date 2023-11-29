@@ -3,17 +3,23 @@ import config from '../config'
 import { useState } from 'react'
 
 const AddCustomer = (props) => {
-    const [name, setName] = useState('')
-    const [street, setStreet] = useState('')
-    const [postCode, setPostCode] = useState('')
-    const [city, setCity] = useState('')
-    const [nip, setNip] = useState('')
-    const [errors, setErrors] = useState([])
+    const [clientData, setClientData] = useState({
+        name: '',
+        street: '',
+        postCode: '',
+        city: '',
+        nip: '',
+
+    })
+
+    const [errors, setErrors] = useState([]);
+
 
     const saveCustomer = (customerObj) => {
         axios
             .post(config.api.url + '/customers/add', customerObj, { mode: 'cors' })
             .then((res) => {
+                console.log(res);
                 props.getCustomers()
             })
             .catch((err) => {
@@ -21,60 +27,67 @@ const AddCustomer = (props) => {
             })
     }
 
-    const resetForm = () => {
-        setName('')
-        setStreet('')
-        setPostCode('')
-        setCity('')
-        setNip('')
-        setErrors([])
-    }
-
+    /*   const resetForm = () => {
+          setName('')
+          setStreet('')
+          setPostCode('')
+          setCity('')
+          setNip('')
+          setErrors([])
+      } */
+console.log(errors);
     const validateForm = (e) => {
         e.preventDefault()
         let errorsValidate = []
-        if (name.trim() === '') {
+        if (clientData.name.trim() === '') {
             errorsValidate.push('Wpisz Imie ')
         }
-        if (street.trim() === '') {
+        if (clientData.street.trim() === '') {
             errorsValidate.push('Wpisz ulice')
         }
-        if (postCode.trim() === '') {
+        if (clientData.postCode.trim() === '') {
             errorsValidate.push('Wpisz kod pocztowy')
         }
-        if (city.trim() === '') {
+        if (clientData.city.trim() === '') {
             errorsValidate.push('Wpisz miasto')
         }
-        if (nip.trim() === '') {
+        if (clientData.nip.trim() === '') {
             errorsValidate.push('Wpisz NIP')
         }
         if (errorsValidate.length > 0) {
-            setErrors(
-                errorsValidate.map((errorText, index) => {
-                    return <li key={index}>{errorText}</li>
-                })
-            )
+            setErrors(errorsValidate)
             return false
         }
 
         const newCustomer = {
-            name: name,
+            name: clientData.name,
             address: {
-                street: street,
-                postCode: postCode,
-                city: city,
+                street: clientData.street,
+                postCode: clientData.postCode,
+                city: clientData.city,
             },
-            nip: nip
+            nip: clientData.nip
         }
         saveCustomer(newCustomer)
-        resetForm()
+        setClientData({
+            name: '',
+            street: '',
+            postCode: '',
+            city: '',
+            nip: '',
+        })
     }
 
-    const handleChangeName = (e) => {
-        setName(e.target.value)
+    const handleInputChange = (e) => {
+        let name = e.target.name
+
+        setClientData({
+            ...clientData,
+            [name]: e.target.value
+        })
     }
 
-    const handleChangeStreet = (e) => {
+    /* const handleChangeStreet = (e) => {
         setStreet(e.target.value)
     }
 
@@ -88,7 +101,7 @@ const AddCustomer = (props) => {
 
     const handleChangeNip = (e) => {
         setNip(e.target.value)
-    }
+    } */
 
 
 
@@ -98,29 +111,29 @@ const AddCustomer = (props) => {
 
                 <div className="wrapper">
                     <label className="name">Nazwa klienta</label>
-                    <input type="text" id="name" value={name} onChange={handleChangeName} placeholder="Nazwa klienta" />
+                    <input type="text" id="name" name='name' value={clientData.name} onChange={handleInputChange} placeholder="Nazwa klienta" />
                 </div>
 
                 <strong>Adres:</strong> <br></br>
 
                 <div className="wrapper">
                     <label className="street">Ulica numer</label>
-                    <input type="text" id="street" value={street} onChange={handleChangeStreet} placeholder="Ulica numer" />
+                    <input type="text" id="street" name='street' value={clientData.street} onChange={handleInputChange} placeholder="Ulica numer" />
                 </div>
 
                 <div className="wrapper">
                     <label className="postcode">Kod pocztowy</label>
-                    <input type="text" id="postcode" value={postCode} onChange={handleChangePostCode} placeholder="Kod pocztowy" />
+                    <input type="text" id="postcode" name='postCode' value={clientData.postCode} onChange={handleInputChange} placeholder="Kod pocztowy" />
                 </div>
 
                 <div className="wrapper">
                     <label className="city">Miasto</label>
-                    <input type="text" id="city" value={city} onChange={handleChangeCity} placeholder="Miasto" />
+                    <input type="text" id="city" name='city' value={clientData.city} onChange={handleInputChange} placeholder="Miasto" />
                 </div>
 
                 <div className="wrapper">
                     <label className="nip">NIP</label>
-                    <input type="text" id="nip" value={nip} onChange={handleChangeNip} placeholder="NIP" />
+                    <input type="text" id="nip" name='nip' value={clientData.nip} onChange={handleInputChange} placeholder="NIP" />
                 </div>
 
                 <div className="wrapper">
@@ -131,7 +144,9 @@ const AddCustomer = (props) => {
 
             <div className='errors'>
                 <ul className='errors'>
-                    {errors}
+                    {errors.map((errorText, index) => {
+                        return <li key={index}>{errorText}</li>
+                    })}
                 </ul>
             </div>
         </div>

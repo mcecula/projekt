@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Home = ({ customers, getCustomer }) => {
 
-   /*  console.log(customers) */
+    /*  console.log(customers) */
     return (
         <div className="customers">
             <h2>Klienci:</h2>
@@ -20,13 +20,12 @@ const Home = ({ customers, getCustomer }) => {
                             <div className='data'> {customer.address.postCode}</div>
                             <div className='data'> {customer.address.city}</div>
                             <div className='data'> NIP: {customer.nip}</div>
-                            <button className='btn' onClick={() =>  getCustomer(customer._id) } ><Link to={'customerData'}>Szczegoly</Link></button>
+                            <button className='btn' onClick={() => getCustomer(customer._id)} ><Link to={'customerData'}>Szczegoly</Link></button>
                         </div>
-
                     )
                 })}
             </div>
-            <button ><Link to={'customer'}>Dodaj klienta</Link></button>
+            <button className='btn'><Link to={'customer'}>Dodaj klienta</Link></button>
         </div>
     )
 }

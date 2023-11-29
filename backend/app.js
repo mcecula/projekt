@@ -22,11 +22,11 @@ app.use(express.json())
 app.use(cors())
 app.use(cookieParser())
 
-const userRouter = require('./app/routs/userRouter')
+const userRouter = require('./app/routs/userRouter')()
 app.use("/user", userRouter);
 
 
-const eventsRouts = require('./app/routs/customerEvent')()
+const eventsRouts = require('./app/routs/customerRouter')()
 app.use('/customers', eventsRouts)
 
 /* app.get('customers/:id', (req, res) => {

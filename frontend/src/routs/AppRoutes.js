@@ -9,15 +9,6 @@ import CustomerData from '../views/CustomerData';
 
 
 
-
-
-
-
-
-
-
-
-
 /* all customers */
 const AppRoutes = (props) => {
   const [customers, setCustomers] = useState([])
@@ -57,16 +48,16 @@ const AppRoutes = (props) => {
       })
   }
 
- /*  useEffect(() => {
-    getCustomer()
-  }, []) */
+  /*  useEffect(() => {
+     getCustomer()
+   }, []) */
 
 
   useEffect(() => {
     getCustomers()
   }, [])
 
-  
+
 
 
   return (

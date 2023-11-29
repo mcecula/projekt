@@ -1,5 +1,5 @@
 const CustomerModel = require('../models/CustomerModel');
-const customerEvent = require('../routs/customerEvent');
+const customerRouter = require('../routs/customerRouter');
 const jwt = require('jsonwebtoken');
 
 module.exports = {

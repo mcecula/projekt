@@ -1,0 +1,23 @@
+.customer {
+    padding: 10px;
+    margin: 30px;
+  
+}
+
+
+th ,td,h2 {
+    padding-left: 50px;
+}
+
+.btn {
+    margin-left: 5px;
+    background-color: rgb(61, 123, 205);
+}
+
+.btn1 {
+    margin: 50px;
+}
+tr {
+    border: 5px solid black;
+}
+

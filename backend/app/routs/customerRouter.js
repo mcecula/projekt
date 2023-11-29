@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const customerController = require('../controllers/customerController')
 
+
 module.exports = () => {
 
     router.get('/', customerController.index)
@@ -12,6 +13,7 @@ module.exports = () => {
 
     router.get('/:id', customerController.oneCustomer)
 
-    
+
+
     return router
 }
