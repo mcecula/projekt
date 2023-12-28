@@ -14,12 +14,10 @@ const AddCustomer = (props) => {
 
     const [errors, setErrors] = useState([]);
 
-
     const saveCustomer = (customerObj) => {
         axios
             .post(config.api.url + '/customers/add', customerObj, { mode: 'cors' })
             .then((res) => {
-                console.log(res);
                 props.getCustomers()
             })
             .catch((err) => {
@@ -27,15 +25,6 @@ const AddCustomer = (props) => {
             })
     }
 
-    /*   const resetForm = () => {
-          setName('')
-          setStreet('')
-          setPostCode('')
-          setCity('')
-          setNip('')
-          setErrors([])
-      } */
-console.log(errors);
     const validateForm = (e) => {
         e.preventDefault()
         let errorsValidate = []
@@ -86,24 +75,6 @@ console.log(errors);
             [name]: e.target.value
         })
     }
-
-    /* const handleChangeStreet = (e) => {
-        setStreet(e.target.value)
-    }
-
-    const handleChangePostCode = (e) => {
-        setPostCode(e.target.value)
-    }
-
-    const handleChangeCity = (e) => {
-        setCity(e.target.value)
-    }
-
-    const handleChangeNip = (e) => {
-        setNip(e.target.value)
-    } */
-
-
 
     return (
         <div className="formWrapper">

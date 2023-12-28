@@ -29,6 +29,9 @@ app.use("/user", userRouter);
 const eventsRouts = require('./app/routs/customerRouter')()
 app.use('/customers', eventsRouts)
 
+const customerEventRouter = require('./app/routs/customerEventRouter')()
+app.use('/events', customerEventRouter)
+
 /* app.get('customers/:id', (req, res) => {
     res.send(req.params)
 }) */
