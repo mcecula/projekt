@@ -30,7 +30,7 @@ const CustomerData = ({ getEvent, customer, setCustomer }) => {
     getEvent(id)
   }, [])
 
-  
+
   return (
     <div >
       <div className='customer' key={customer._id}>
@@ -45,7 +45,7 @@ const CustomerData = ({ getEvent, customer, setCustomer }) => {
       <div className="action" >
         <h2><strong>Akcja:</strong></h2>
         <table >
-          {/* <thead>
+          <thead>
             <tr key={id} >
               <th>LP.</th>
               <th>Opis</th>
@@ -53,7 +53,7 @@ const CustomerData = ({ getEvent, customer, setCustomer }) => {
               <th>Data</th>
               <th>Edycja</th>
             </tr>
-          </thead> */}
+          </thead>
 
           <tbody >
             {customer.events.map((event, index) => {

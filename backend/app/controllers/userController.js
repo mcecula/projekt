@@ -3,11 +3,9 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   login: (req, res) => {
-    /* console.log(req.body); */
+
     User.findOne({ username: req.body.username })
       .then((user) => {
-        /*  res.json(user) */
-        /* res.redirect('/'); */
 
         if (!user) {
           res.json({
@@ -22,11 +20,11 @@ module.exports = {
 
           const token = user.generateAuthToken(user);
           res.cookie("AuthToken", token);
-          /* res.redirect("/"); */
           return res.json({
             ...user,
             jwt_token: token
           })
+
         } else {
           res.json({
             error: true,

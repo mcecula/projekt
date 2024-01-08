@@ -3,24 +3,24 @@ const CustomerEventModel = require("../models/CustomerEventModel");
 module.exports = {
   create: (req, res) => {
     console.log(req.params.id);
-    /* const event = new CustomerEventModel({
-      description: { type: String, required: true },
+    const event = new CustomerEventModel({
+      description: req.body.description,
       type: {
-        type: String,
-        enum: ["call", "meeting", "email"]
+        enum: req.body.type.enum
       },
-      date: { type: Date, required: true },
-      customer: {
+      date: req.body.date,
+      customer: req.body.ObjectId,
+      /* {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Customer",
-      },
+      }, */
     })
     event.save().then(event => {
       return res.status(201).json(event)
     })
       .catch(err => {
         res.status(500).json({ error: err })
-      }) */
+      })
   },
 
   delete: (req, res) => {
@@ -39,6 +39,17 @@ module.exports = {
           error: err
         })
       })
-
   },
+
+  oneEvent: (req, res) => {
+    CustomerEventModel.findById(req.params.id)
+      .then((respApi) => {
+        res.json(respApi)
+      })
+      .catch(err => {
+        res.status(500).json({
+          error: err
+        })
+      })
+  }
 }

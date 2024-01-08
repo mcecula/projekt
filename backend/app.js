@@ -25,16 +25,11 @@ app.use(cookieParser())
 const userRouter = require('./app/routs/userRouter')()
 app.use("/user", userRouter);
 
-
 const eventsRouts = require('./app/routs/customerRouter')()
 app.use('/customers', eventsRouts)
 
 const customerEventRouter = require('./app/routs/customerEventRouter')()
 app.use('/events', customerEventRouter)
-
-/* app.get('customers/:id', (req, res) => {
-    res.send(req.params)
-}) */
 
 app.listen(config.app.port, () => {
     console.log('Serwer Node.js działa');

@@ -1,0 +1,23 @@
+* {
+    border-radius: 6px;
+}
+
+.akcja {
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+}
+
+span {
+    position: relative;
+    left: 95%;
+}
+
+span :hover {
+    cursor: pointer;
+}
+
+textarea {
+    width: 100%;
+}

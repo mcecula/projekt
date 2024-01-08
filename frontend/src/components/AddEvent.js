@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import config from '../config'
+import './AddEvent.css'
 
 const AddEvent = (props) => {
     const [formData, setFormData] = useState({
@@ -26,7 +27,6 @@ const AddEvent = (props) => {
             date: formData.date,
         }
 
-
         axios
             .post(config.api.url + `/events/add/${props.clientid}`, newEvent, { mode: 'cors' })
             .then((res) => {
@@ -42,11 +42,11 @@ const AddEvent = (props) => {
             date: "",
         })
     }
-    return (
-        <div className="akcja" >
 
-            <span onClick={() => { props.setShowModal(false) }}>X</span>
-            <form method='POST' onSubmit={handleSubmit} >
+    return (
+        <div className='akcja' >
+            <form className='akcja' method='POST' onSubmit={handleSubmit} >
+                <span onClick={() => { props.setShowModal(false) }}><strong>X</strong></span>
                 <h3>Dodaj akcję</h3>
                 <div >
                     <label className="opis">Opis</label><br />
@@ -63,10 +63,9 @@ const AddEvent = (props) => {
                 </div><br />
 
                 <div>
-                    <label className="data">Data</label>
-                    <data name="date" type="date" placeholder="Data" value={formData.date} onChange={handleInputData}></data>
+                    <label className="opis">Data</label>
+                    <input name="date" type="date" placeholder="Data" value={formData.date} onChange={handleInputData}></input>
                 </div>
-
 
                 <button type="submit" className="btn" >Dodaj</button>
             </form>

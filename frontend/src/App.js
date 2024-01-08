@@ -6,15 +6,14 @@ import axios from 'axios'
 
 function App() {
 
- /*  const [customer, setCustomer] = useState(JSON.parse(localStorage.getItem('customer'))); */
-  const [user, setUser] =useState(JSON.parse(localStorage.getItem('user')));
-  
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
   axios.defaults.headers.common['Authorization'] = 'Bearer' + (user ? user.jwt_token : '');
-  
+
   return (
     <div className="App">
-      <AppNav  user={user} setUser={setUser} /* customer={customer} setCustomer={setCustomer} */ />
-      <AppRoutes user={user} /* setCustomer={setCustomer} */ setUser={setUser}/>
+      <AppNav user={user} setUser={setUser} />
+      <AppRoutes user={user} setUser={setUser} />
 
     </div>
   );

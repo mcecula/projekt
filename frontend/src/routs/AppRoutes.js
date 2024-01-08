@@ -11,11 +11,11 @@ import CustomerData from '../views/CustomerData';
 
 
 const AppRoutes = (props) => {
-/* all customers */
+  /* all customers */
   const [customers, setCustomers] = useState([])
 
   /* events */
-const [event, setEvent] = useState([]) 
+  const [event, setEvent] = useState([])
 
   /* one customer */
   const [customer, setCustomer] = useState({
@@ -63,10 +63,6 @@ const [event, setEvent] = useState([])
         console.error(err)
       })
   }
-  /*  useEffect(() => {
-     getCustomer()
-   }, []) */
-
 
   useEffect(() => {
     getCustomers()
@@ -78,7 +74,7 @@ const [event, setEvent] = useState([])
   return (
 
     <Routes>
-      <Route path='/' element={<Home user= {props.user} customers={customers} getCustomer={getCustomer} />} />
+      <Route path='/' element={<Home user={props.user} customers={customers} getCustomer={getCustomer} />} />
       <Route path='/customer' element={<AddCustomer getCustomers={getCustomers} />} />
       <Route path='/login' element={<Login setUser={props.setUser} />} />
       <Route path='/customerData/:id' element={<CustomerData customer={customer} event={event} getEvent={getEvent} />} />
