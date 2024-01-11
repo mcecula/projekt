@@ -12,6 +12,7 @@ module.exports = {
     },
 
     create: (req, res) => {
+        console.log(req.params.id);
         const event = new CustomerModel({
             name: req.body.name,
             address: {

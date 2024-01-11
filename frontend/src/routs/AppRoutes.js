@@ -15,7 +15,7 @@ const AppRoutes = (props) => {
   const [customers, setCustomers] = useState([])
 
   /* events */
-  const [event, setEvent] = useState([])
+
 
   /* one customer */
   const [customer, setCustomer] = useState({
@@ -44,7 +44,7 @@ const AppRoutes = (props) => {
     axios
       .get(config.api.url + `/customers/${id}`)
       .then((res) => {
-        console.log(res.data);
+        /* console.log(res.data); */
         setCustomer(res.data)
       })
       .catch((err) => {
@@ -52,17 +52,7 @@ const AppRoutes = (props) => {
       })
   }
 
-  const getEvent = (id) => {
-    axios
-      .get(config.api.url + `/events/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        setEvent(res.data)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }
+
 
   useEffect(() => {
     getCustomers()
@@ -77,7 +67,7 @@ const AppRoutes = (props) => {
       <Route path='/' element={<Home user={props.user} customers={customers} getCustomer={getCustomer} />} />
       <Route path='/customer' element={<AddCustomer getCustomers={getCustomers} />} />
       <Route path='/login' element={<Login setUser={props.setUser} />} />
-      <Route path='/customerData/:id' element={<CustomerData customer={customer} event={event} getEvent={getEvent} />} />
+      <Route path='/customerData/:id' element={<CustomerData customer={customer} />} />
     </Routes>
 
   )

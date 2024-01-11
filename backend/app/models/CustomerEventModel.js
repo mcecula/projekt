@@ -4,11 +4,11 @@ const CustomerEvent = new mongoose.Schema({
   description: { type: String, required: true },
   type: {
     type: String,
-    enum: ["call", "meeting", "email"]
+   /*  enum: ["call", "meeting", "email"] */
   },
   date: { type: Date, required: true },
   customer: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "Customer",
   },
 },

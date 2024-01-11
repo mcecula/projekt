@@ -2,22 +2,22 @@ const CustomerEventModel = require("../models/CustomerEventModel");
 
 module.exports = {
   create: (req, res) => {
-    console.log(req.params.id);
+
     const event = new CustomerEventModel({
       description: req.body.description,
       type: {
-        enum: req.body.type.enum
+       enum:req.body.type
       },
       date: req.body.date,
-      customer: req.body.ObjectId,
-      /* {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Customer",
-      }, */
+      customer: req.params.id,
+
     })
-    event.save().then(event => {
-      return res.status(201).json(event)
-    })
+
+    event.save()
+      .then(event => {
+        console.log(event);
+        return res.status(201).json(event)
+      })
       .catch(err => {
         res.status(500).json({ error: err })
       })
@@ -42,8 +42,10 @@ module.exports = {
   },
 
   oneEvent: (req, res) => {
-    CustomerEventModel.findById(req.params.id)
+
+    CustomerEventModel.find({ customer: req.params.id })
       .then((respApi) => {
+        console.log(respApi);
         res.json(respApi)
       })
       .catch(err => {

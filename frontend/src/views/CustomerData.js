@@ -5,32 +5,41 @@ import { useParams } from "react-router-dom";
 import config from '../config'
 import { useEffect, useState } from 'react';
 
-const CustomerData = ({ getEvent, customer, setCustomer }) => {
+const CustomerData = ({ customer }) => {
 
   const [showModal, setShowModal] = useState(false)
+  const [events, setEvents] = useState([])
+
 
   const { id } = useParams();
-  console.log(id);
+  /* console.log(id); */
   const deleteCustomerEvent = (customerEventId) => {
 
     axios
-      .delete(`/events/delete/${id}`, {
-        data: customerEventId,
-      })
+      .delete(config.api.url + `/events/delete/${id}`)
       .then((res) => {
-        console.log(res.data);
-        axios.get(config.api.url + `/customers/${id}`)
-          .then((res) => {
-            console.log(id);
-            setCustomer(res.data);
-          });
+        getEvent(res.data);
       });
   };
+
+  const getEvent = (id) => {
+    axios
+      .get(config.api.url + `/events/${id}`)
+      .then((res) => {
+        /* console.log(res.data); */
+        setEvents(res.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
+
   useEffect(() => {
     getEvent(id)
+    
   }, [])
 
-
+  console.log(customer);
   return (
     <div >
       <div className='customer' key={customer._id}>
@@ -56,7 +65,7 @@ const CustomerData = ({ getEvent, customer, setCustomer }) => {
           </thead>
 
           <tbody >
-            {customer.events.map((event, index) => {
+            {events && events.map((event, index) => {
               return (
                 <tr key={event._id}>
                   <td>{index + 1}.</td>
