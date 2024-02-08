@@ -8,7 +8,9 @@ module.exports = () => {
 
   router.delete('/delete/:id', customerEvent.delete)
 
-  router.get('/:id', customerEvent.oneEvent)
+  router.get('/:id', customerEvent.allEvents)
+
+  router.put('/edit/:id', customerEvent.editEvent)
 
   return router
 }

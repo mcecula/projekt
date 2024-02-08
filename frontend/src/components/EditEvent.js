@@ -1,10 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import config from '../config'
-import './AddEvent.css'
 
-
-const AddEvent = (props) => {
+const EditEvent = (props) => {
     const [formData, setFormData] = useState({
         description: "",
         type: "",
@@ -19,7 +17,8 @@ const AddEvent = (props) => {
             return { ...data, [name]: target.value };
         });
     }
-    const handleSubmit = (e) => {
+
+    const editSubmit = (e) => {
         e.preventDefault();
 
         const newEvent = {
@@ -29,10 +28,11 @@ const AddEvent = (props) => {
         }
 
         axios
-            .post(config.api.url + `/events/add/${props.clientid}`, newEvent, { mode: 'cors' })
+            .put(config.api.url + `/events/edit/${props.editId}`, newEvent, { mode: 'cors' })
             .then((res) => {
-                props.getEvent(props.customerId)
-                props.setShowModal(false)
+                console.log(res);
+                props.getEvent(res.data.customer)
+                props.setShowModalEdit(false)
             })
             .catch((err) => {
                 console.error(err)
@@ -49,9 +49,9 @@ const AddEvent = (props) => {
 
     return (
         <div className='akcja' >
-            <form className='akcja' method='POST' onSubmit={handleSubmit} >
-                <span onClick={() => { props.setShowModal(false) }}><strong>X</strong></span>
-                <h3>Dodaj akcję</h3>
+            <form className='akcja' onSubmit={editSubmit} >
+                <span onClick={() => { props.setShowModalEdit(false) }}><strong>X</strong></span>
+                <h3>Edytuj akcję</h3>
                 <div >
                     <label className="opis">Opis</label><br />
                     <textarea name="description" placeholder="Opis" value={formData.description} onChange={handleInputData}></textarea>
@@ -71,10 +71,10 @@ const AddEvent = (props) => {
                     <input name="date" type="date" placeholder="Data" value={formData.date} onChange={handleInputData} ></input>
                 </div>
 
-                <button type="submit" className="btn" >Dodaj</button>
+                <button type="submit" className="btn" >Zapisz edycje</button>
             </form>
         </div>
     )
 
 }
-export default AddEvent;
+export default EditEvent;

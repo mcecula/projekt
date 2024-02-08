@@ -13,7 +13,5 @@ module.exports = () => {
 
     router.get('/:id', customerController.oneCustomer)
 
-
-
     return router
 }

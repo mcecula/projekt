@@ -1,16 +1,22 @@
 * {
     box-sizing: border-box;
-    position: relative; 
+    position: relative;
     text-align: left;
 }
 
 .customer {
     border: 1px solid black;
     border-radius: 10px;
-   
-    
+    background-color: transparent;
+    color:black;
 }
 
 .data {
     margin-bottom: 2px;
+}
+
+.errors {
+    color: red;
+    position: relative;
+    left: 15%;
 }

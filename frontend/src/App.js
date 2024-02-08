@@ -14,7 +14,6 @@ function App() {
     <div className="App">
       <AppNav user={user} setUser={setUser} />
       <AppRoutes user={user} setUser={setUser} />
-
     </div>
   );
 }

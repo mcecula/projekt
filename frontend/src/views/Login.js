@@ -31,8 +31,6 @@ const Login = (props) => {
                 password: formData.password,
             })
             .then((res) => {
-                console.log(res.data)
-
                 if (Array.isArray(res.data.username)) {
                     setLoginMessage('The user field is required');
                 } else if (Array.isArray(res.data.password)) {
@@ -54,7 +52,6 @@ const Login = (props) => {
 
     return (
         <div className="login">
-            {/* {props.user && <Navigate to='/' />} */}
             <form action='/login' method='POST' onSubmit={handleSubmit} >
                 {loginMessage && <h2>{loginMessage}</h2>}
                 <label className="login">Login</label>

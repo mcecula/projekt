@@ -7,7 +7,7 @@ form {
     padding: 15px;
 }
 
- form input {
+form input {
     display: block;
     width: 100%;
     margin-bottom: 5px;
@@ -16,10 +16,11 @@ form {
 
 .btn {
     font-size: 13px;
-    border-radius: 6px ;
+    border-radius: 6px;
     display: inline-block;
     margin: 15px 0;
 }
+
 .btn:hover {
     background-color: rgb(26, 151, 58);
     cursor: pointer;

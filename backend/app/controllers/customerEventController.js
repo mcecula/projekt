@@ -5,17 +5,13 @@ module.exports = {
 
     const event = new CustomerEventModel({
       description: req.body.description,
-      type: {
-       enum:req.body.type
-      },
+      type: req.body.type,
       date: req.body.date,
       customer: req.params.id,
-
     })
 
     event.save()
       .then(event => {
-        console.log(event);
         return res.status(201).json(event)
       })
       .catch(err => {
@@ -41,13 +37,42 @@ module.exports = {
       })
   },
 
-  oneEvent: (req, res) => {
+  allEvents: (req, res) => {
 
     CustomerEventModel.find({ customer: req.params.id })
       .then((respApi) => {
-        console.log(respApi);
         res.json(respApi)
       })
+      .catch(err => {
+        res.status(500).json({
+          error: err
+        })
+      })
+  },
+
+  editEvent: (req, res) => {
+
+    let newContent = {}
+
+    if (req.body.description !== '') {
+      newContent.description = req.body.description
+    }
+    if (req.body.type !== '') {
+      newContent.type = req.body.type
+    }
+
+    if (req.body.date !== '') {
+      newContent.date = req.body.date
+    }
+
+    CustomerEventModel.findByIdAndUpdate(req.params.id,
+      newContent, { returnOriginal: false })
+
+      .then((editRes) => {
+        console.log(editRes);
+        return res.send(editRes)
+      })
+
       .catch(err => {
         res.status(500).json({
           error: err

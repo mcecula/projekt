@@ -1,11 +1,13 @@
 .customer {
+    width: 100;
     padding: 10px;
     margin: 30px;
-  
+
 }
 
-
-th ,td,h2 {
+th,
+td,
+h2 {
     padding-left: 50px;
 }
 
@@ -15,14 +17,14 @@ th ,td,h2 {
 }
 
 .btn1 {
+    
     margin: 50px;
 }
+
 tr {
-    border: 5px solid black;
+    border: 5px solid white;
 }
 
 .usun {
-    margin-left: 100px;
     margin-right: 10px;
 }
-

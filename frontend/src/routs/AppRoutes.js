@@ -11,11 +11,9 @@ import CustomerData from '../views/CustomerData';
 
 
 const AppRoutes = (props) => {
+
   /* all customers */
   const [customers, setCustomers] = useState([])
-
-  /* events */
-
 
   /* one customer */
   const [customer, setCustomer] = useState({
@@ -44,15 +42,12 @@ const AppRoutes = (props) => {
     axios
       .get(config.api.url + `/customers/${id}`)
       .then((res) => {
-        /* console.log(res.data); */
         setCustomer(res.data)
       })
       .catch((err) => {
         console.error(err)
       })
   }
-
-
 
   useEffect(() => {
     getCustomers()
@@ -67,7 +62,7 @@ const AppRoutes = (props) => {
       <Route path='/' element={<Home user={props.user} customers={customers} getCustomer={getCustomer} />} />
       <Route path='/customer' element={<AddCustomer getCustomers={getCustomers} />} />
       <Route path='/login' element={<Login setUser={props.setUser} />} />
-      <Route path='/customerData/:id' element={<CustomerData customer={customer} />} />
+      <Route path='/customerData/:id' element={<CustomerData customer={customer} getCustomer={getCustomer} />} />
     </Routes>
 
   )

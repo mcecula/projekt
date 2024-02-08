@@ -4,29 +4,30 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import config from '../config'
 import { useEffect, useState } from 'react';
+import EditEvent from '../components/EditEvent';
 
-const CustomerData = ({ customer }) => {
+const CustomerData = ({ customer, getCustomer }) => {
 
   const [showModal, setShowModal] = useState(false)
   const [events, setEvents] = useState([])
-
+  const [showModalEdit, setShowModalEdit] = useState(false)
+  const [editId, seteditId] = useState('')
 
   const { id } = useParams();
-  /* console.log(id); */
+
   const deleteCustomerEvent = (customerEventId) => {
 
     axios
-      .delete(config.api.url + `/events/delete/${id}`)
+      .delete(config.api.url + `/events/delete/${customerEventId}`)
       .then((res) => {
-        getEvent(res.data);
+        getEvent(id);
       });
   };
-
+ 
   const getEvent = (id) => {
     axios
       .get(config.api.url + `/events/${id}`)
       .then((res) => {
-        /* console.log(res.data); */
         setEvents(res.data)
       })
       .catch((err) => {
@@ -36,10 +37,13 @@ const CustomerData = ({ customer }) => {
 
   useEffect(() => {
     getEvent(id)
-    
+    getCustomer(id)
   }, [])
 
-  console.log(customer);
+  useEffect(() => {
+    setShowModalEdit(true)
+  }, [editId])
+
   return (
     <div >
       <div className='customer' key={customer._id}>
@@ -65,16 +69,17 @@ const CustomerData = ({ customer }) => {
           </thead>
 
           <tbody >
-            {events && events.map((event, index) => {
+            {events && events !== null && events.map((event, index) => {
               return (
                 <tr key={event._id}>
                   <td>{index + 1}.</td>
                   <td>{event.description}</td>
                   <td>{event.type}</td>
-                  <td>{event.date}</td>
+                  <td>{event.date !== null && (event.date).substring(0, 10)}</td>
                   <td>
                     <button className='btn usun' onClick={() => deleteCustomerEvent(event._id)}>Usun</button>
-                    <button className='btn'>Edytuj</button>
+
+                    <button className='btn' onClick={() => { seteditId(event._id) }}>Edytuj</button>
                   </td>
                 </tr>
               );
@@ -82,9 +87,10 @@ const CustomerData = ({ customer }) => {
           </tbody>
         </table>
         <button className='btn btn1' onClick={() => { setShowModal(true) }}>Dodaj akcje</button>
-        {showModal && <AddEvent
-          customerId={customer._id} setShowModal={setShowModal} clientid={id} getEvent={getEvent}
-        />}
+
+        {showModal && <AddEvent customerId={customer._id} setShowModal={setShowModal} clientid={id} getEvent={getEvent} />}
+        {editId !== '' && showModalEdit && <EditEvent customerId={customer._id} setShowModalEdit={setShowModalEdit} getEvent={getEvent} editId={editId} />}
+
       </div>
     </div>
 

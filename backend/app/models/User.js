@@ -27,12 +27,10 @@ User.pre('save', function (next) {
         if (err) {
             res.send(err);
         }
-
         bcrypt.hash(user.password, salt, function (err, hash) {
             if (err) {
                 res.send(err);
             }
-
             user.password = hash;
             next();
         })

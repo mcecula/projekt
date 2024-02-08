@@ -108,18 +108,18 @@ const AddCustomer = (props) => {
                 </div>
 
                 <div className="wrapper">
-                    <button className="submit" type='submit'>Dodaj</button>
+                    <button className="submit btn" type='submit'>Dodaj</button>
                 </div>
-
+                <div className='errors'>
+                    <ul className='errors'>
+                        {errors.map((errorText, index) => {
+                            return <strong><li key={index}>{errorText}</li></strong>
+                        })}
+                    </ul>
+                </div>
             </form>
 
-            <div className='errors'>
-                <ul className='errors'>
-                    {errors.map((errorText, index) => {
-                        return <li key={index}>{errorText}</li>
-                    })}
-                </ul>
-            </div>
+
         </div>
     )
 }
