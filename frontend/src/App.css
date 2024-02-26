@@ -1,6 +1,10 @@
 .App {
   text-align: center;
- 
+  background-image: url(../src/img/Sage-Reports-Automation.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: auto;
 }
 
 a {
