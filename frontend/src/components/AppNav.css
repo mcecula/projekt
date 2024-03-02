@@ -1,7 +1,9 @@
 .mainNav ul {
+    margin: 0;
     padding: 0;
     text-align: left;
 }
+
 
 .mainNav ul li {
     display: inline-block;

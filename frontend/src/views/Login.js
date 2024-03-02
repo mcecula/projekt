@@ -54,7 +54,7 @@ const Login = (props) => {
         <div className="login">
             <form action='/login' method='POST' onSubmit={handleSubmit} >
                 {loginMessage && <h2>{loginMessage}</h2>}
-                <label className="login">Login</label>
+                <label >Login</label>
                 <input type="text" name="username" placeholder="Login" value={formData.username} onChange={handleInputChange} />
 
                 <label className="password">Hasło</label>

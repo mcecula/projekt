@@ -1,6 +1,7 @@
 import axios from 'axios'
 import config from '../config'
 import { useState } from 'react'
+import './AddCustomer.css'
 
 const AddCustomer = (props) => {
     const [clientData, setClientData] = useState({

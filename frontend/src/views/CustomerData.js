@@ -45,7 +45,7 @@ const CustomerData = ({ customer, getCustomer }) => {
   }, [editId])
 
   return (
-    <div >
+    <div className='wrap' >
       <div className='customer' key={customer._id}>
         <h3>{customer.name}</h3>
         <strong>Adres:</strong>
