@@ -3,6 +3,13 @@
     position: relative;
     text-align: left;
 }
+.background{
+    background-image: url(../img/Sage-Reports-Automation.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+   
+}
 
 .customer {
     border: 1px solid black;

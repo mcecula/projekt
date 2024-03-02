@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import config from '../config';
 import CustomerData from '../views/CustomerData';
+import SignUp from "../views/SignUp";
 
 
 
@@ -63,6 +64,7 @@ const AppRoutes = (props) => {
       <Route path='/customer' element={<AddCustomer getCustomers={getCustomers} />} />
       <Route path='/login' element={<Login setUser={props.setUser} />} />
       <Route path='/customerData/:id' element={<CustomerData customer={customer} getCustomer={getCustomer} />} />
+      <Route path='/signup' element={<SignUp user={props.user} />} />
     </Routes>
 
   )

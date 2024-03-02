@@ -33,6 +33,8 @@ const AppNav = (props) => {
                 {props.user && <li> <Link to='/customer'>Dodaj klienta</Link></li>}
 
                 {props.user && <li> <Link to='/' onClick={handleLogout}>Logout</Link></li>}
+
+                {!props.user && <li> <Link to='/signup'>SignUp</Link></li>}
             </ul></strong>
         </nav>
     )
